@@ -206,7 +206,7 @@ class Application
         else
         {
             $result = array();
-            $result['transactionState'] = $found->state;
+            $result['transactionState'] = (int)$found->state;
             $result['timestamp'] = $found->create_time;
             $result['providerTrnId'] = $found->id;
             $this->response->send($result);
@@ -304,7 +304,7 @@ class Application
                                      transaction_id AS transactionId,
                                      create_time AS timestamp,
                                      amount FROM `paynet_transactions`
-                                     WHERE create_time>='".$dateFrom."' AND create_time<='".$dateTo."'");
+                                     WHERE create_time>='".$dateFrom."' AND create_time<='".$dateTo."' AND state=1");
 
         $result = array();
         $result['statements'] = $transactions;
