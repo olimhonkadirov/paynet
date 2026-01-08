@@ -100,7 +100,7 @@ class Transaction
         $db->query("UPDATE paynet_transactions
                             SET `state`=".$this->state.",
                             `cancel_time`='".$this->cancel_time."', 
-                            `canceltimeinstamp`='".FORMAT::datetime2timestamp($this->cancel_time)."' where id=".$this->id);
+                            `canceltimeinstamp`='".Format::datetime2timestamp($this->cancel_time)."' where id=".$this->id);
 
         // todo: Update transaction on data store
     }
