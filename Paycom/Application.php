@@ -70,7 +70,7 @@ class Application
             $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'Required params not found');
         }
 
-        if (!isset($this->request->params['serviceId'])) {
+        if (!isset($this->request->params['serviceId']) || $this->request->params['serviceId'] != $this->config['serviceId']) {
             $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'Service not found');
         }
 
@@ -180,7 +180,7 @@ class Application
             $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'Required params not found');
         }
 
-        if (!isset($this->request->params['serviceId'])) {
+        if (!isset($this->request->params['serviceId']) || $this->request->params['serviceId'] != $this->config['serviceId']) {
             $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'Service not found');
         }
         
@@ -220,7 +220,7 @@ class Application
             $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'Required params not found');
         }
 
-        if (!isset($this->request->params['serviceId'])) {
+        if (!isset($this->request->params['serviceId']) || $this->request->params['serviceId'] != $this->config['serviceId']) {
             $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'Service not found');
         }
         
@@ -273,16 +273,16 @@ class Application
             $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'Required params not found');
         }
 
-        if (!isset($this->request->params['serviceId'])) {
+        if (!isset($this->request->params['serviceId']) || $this->request->params['serviceId'] != $this->config['serviceId']) {
             $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'Service not found');
         }
 
         if (!isset($this->request->params['dateFrom'])) {
-            $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'DateFrom not found');
+            $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'DateFrom not found');
         }
 
         if (!isset($this->request->params['dateTo'])) {
-            $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'DateTo not found');
+            $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'DateTo not found');
         }
 
         $dateFrom = $this->request->params['dateFrom'];
@@ -353,7 +353,6 @@ class Application
             $driver = $drivers[0];
 
             $result = array();
-            $result['status'] = 0;
             $result['timestamp'] = date('Y-m-d H:i:s');
             $result['fields'] = array();
             $result['fields']['balance'] = $driver['balance'];

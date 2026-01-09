@@ -27,7 +27,7 @@ class Response
         $response['jsonrpc'] = "2.0";
         $response['id'] = $this->request->id;
         $response['result'] = $result;
-        $response['error'] = $error;
+        $response['status'] = 0;
 
         echo json_encode($response);
     }
