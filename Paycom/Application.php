@@ -326,6 +326,10 @@ class Application
             $this->response->error(PaycomException::REQUIRED_PARAMS_NOT_FOUND, 'Client id not found');
         }
 
+        if (!isset($this->request->params['serviceId']) || $this->request->params['serviceId'] != $this->config['serviceId']) {
+            $this->response->error(PaycomException::SERVICE_NOT_FOUND, 'Service not found');
+        }
+
         $client_id = $this->request->params['fields']['client_id'];
 
         $db = new DB();
