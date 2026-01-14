@@ -105,4 +105,10 @@ class Format
         return $dt !== false && $dt->format($format) === $date;
     }
 
+    public static function formatToCustomTimestamp(string $mysqlDatetime): string
+    {
+        $dt = new \DateTime($mysqlDatetime, new \DateTimeZone('Asia/Tashkent'));
+        return $dt->format('D M d H:i:s T Y');
+    }
+
 }

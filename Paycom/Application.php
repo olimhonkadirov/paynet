@@ -207,7 +207,7 @@ class Application
         {
             $result = array();
             $result['transactionState'] = (int)$found->state;
-            $result['timestamp'] = $found->create_time;
+            $result['timestamp'] = Format::formatToCustomTimestamp($found->create_time);
             $result['providerTrnId'] = $found->id;
             $this->response->send($result);
         }
