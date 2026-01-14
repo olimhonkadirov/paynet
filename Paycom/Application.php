@@ -207,7 +207,7 @@ class Application
         {
             $result = array();
             $result['transactionState'] = (int)$found->state;
-            $result['timestamp'] = $found->create_time;
+            $result['timestamp'] = Format::formatTimestampUz($found->create_time);
             $result['providerTrnId'] = $found->id;
             $this->response->send($result);
         }
@@ -357,6 +357,7 @@ class Application
             $driver = $drivers[0];
 
             $result = array();
+	    $result['status'] = "0";
             $result['timestamp'] = date('Y-m-d H:i:s');
             $result['fields'] = array();
             $result['fields']['balance'] = $driver['balance'];

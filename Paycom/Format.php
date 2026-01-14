@@ -105,4 +105,14 @@ class Format
         return $dt !== false && $dt->format($format) === $date;
     }
 
+    public static function formatTimestampUz(string $date): string
+   {
+       $dt = new \DateTime(
+           $date,
+           new \DateTimeZone('Asia/Tashkent')
+       );
+
+      return $dt->format('D M d H:i:s') . ' UZT ' . $dt->format('Y');
+   }
+
 }
