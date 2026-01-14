@@ -50,9 +50,9 @@ class PaycomException extends \Exception
             $this->error['message'] = $this->message;
         }
 
-        if ($this->data) {
-            $this->error['data'] = $this->data;
-        }
+        // if ($this->data) {
+        //     $this->error['data'] = $this->data;
+        // }
     }
 
     public function send()
@@ -68,8 +68,9 @@ class PaycomException extends \Exception
         header('Content-Type: application/json; charset=UTF-8');
 
         // create response
+        $response['jsonrpc'] = "2.0";
         $response['id'] = $this->request_id;
-        $response['result'] = null;
+        // $response['result'] = null;
         $response['error'] = $this->error;
 
         echo json_encode($response);
@@ -77,6 +78,6 @@ class PaycomException extends \Exception
 
     public static function message($ru, $uz = '', $en = '')
     {
-        return ['ru' => $ru, 'uz' => $uz, 'en' => $en];
+        return $ru;
     }
 }

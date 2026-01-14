@@ -106,8 +106,6 @@ class Application
                 $this->request->id,
                 PaycomException::message(
                     'Неверная сумма.',
-                    'Summa notugri kursatilgan.',
-                    'Incorrect order amount.'
                 ),
                 PaycomException::ERROR_INVALID_AMOUNT,
                 'driver_id'
@@ -119,8 +117,6 @@ class Application
                 $this->request->id,
                 PaycomException::message(
                     'Сумма превышает максимальный лимит',
-                    'Summa limitdan oshgan',
-                    'Summa exceed max limit.'
                 ),
                 PaycomException::ERROR_EXCEED_MAX_AMOUNT,
                 'driver_id'
@@ -141,7 +137,7 @@ class Application
                                        LEFT JOIN tx_car_brand cb ON c.car_brand_id=cb.id 
                                        LEFT JOin tx_car_model cm ON c.car_model_id=cm.id
                                        LEFT JOIN tx_car_color cc ON c.car_color_id=cc.id
-                                       WHERE d.id=".$client_id." AND d.status!=-1");
+                                       WHERE d.id=".$client_id." AND d.status!=-1 AND d.city_id!=1");
 
         if (count($drivers) == 0)
         {
@@ -207,7 +203,7 @@ class Application
         {
             $result = array();
             $result['transactionState'] = (int)$found->state;
-            $result['timestamp'] = Format::formatToCustomTimestamp($found->create_time);
+            $result['timestamp'] = Format::formatTimestampUz($found->create_time);
             $result['providerTrnId'] = $found->id;
             $this->response->send($result);
         }
@@ -346,7 +342,7 @@ class Application
                                        LEFT JOIN tx_car_brand cb ON c.car_brand_id=cb.id 
                                        LEFT JOin tx_car_model cm ON c.car_model_id=cm.id
                                        LEFT JOIN tx_car_color cc ON c.car_color_id=cc.id
-                                       WHERE d.id=".$client_id." AND d.status!=-1");
+                                       WHERE d.id=".$client_id." AND d.status!=-1 AND d.city_id!=1");
 
         if (count($drivers) == 0)
         {
@@ -357,6 +353,7 @@ class Application
             $driver = $drivers[0];
 
             $result = array();
+	        $result['status'] = "0";
             $result['timestamp'] = date('Y-m-d H:i:s');
             $result['fields'] = array();
             $result['fields']['balance'] = $driver['balance'];
